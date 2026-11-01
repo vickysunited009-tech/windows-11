@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cowboy OS 11</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: linear-gradient(#24170d55,#100b08aa),
+  url('https://images.unsplash.com/photo-1511497584788-876760111969?w=1600');
+  background-size: cover;
+  background-position: center;
+}
+.desktop { padding: 20px; }
+.icon {
+  width: 85px;
+  padding: 12px 5px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.icon:active { background: #ffffff44; }
+.icon span { font-size: 35px; display:block; }
+.taskbar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background: #202c3ddd;
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+.taskbar button {
+  background: transparent;
+  border: 0;
+  font-size: 25px;
+  color: white;
+}
+#startMenu {
+  display: none;
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #263449ee;
+  padding: 25px;
+  border-radius: 18px;
+  width: 280px;
+}
+#window {
+  display:none;
+  position:absolute;
+  top:20%;
+  left:8%;
+  width:84%;
+  padding:20px;
+  background:#25364dee;
+  border:1px solid #ffffff55;
+  border-radius:15px;
+}
+</style>
+</head>
+<body>
+<div class="desktop">
+  <div class="icon" onclick="openWindow('My Computer')">
+    <span>💻</span> This PC
+  </div>
+  <div class="icon" onclick="openWindow('File Explorer')">
+    <span>📁</span> Files
+  </div>
+  <div class="icon" onclick="openWindow('Settings')">
+    <span>⚙️</span> Settings
+  </div>
+  <div class="icon" onclick="openWindow('About Cowboy OS')">
+    <span>🤠</span> About
+  </div>
+</div>
+
+<div id="window">
+  <button onclick="closeWindow()">✖ Close</button>
+  <h2 id="windowTitle"></h2>
+  <p>Welcome to Cowboy OS 11!</p>
+</div>
+
+<div id="startMenu">
+  <h2>🤠 Cowboy OS 11</h2>
+  <p>Welcome, partner!</p>
+  <p>💻 This PC</p>
+  <p>📁 File Explorer</p>
+  <p>⚙️ Settings</p>
+</div>
+
+<div class="taskbar">
+  <button onclick="toggleStart()">⊞</button>
+  <button onclick="openWindow('Browser')">🌐</button>
+  <button onclick="openWindow('Files')">📁</button>
+  <button onclick="openWindow('Settings')">⚙️</button>
+  <span id="clock"></span>
+</div>
+
+<script>
+function toggleStart(){
+ let s=document.getElementById('startMenu');
+ s.style.display=s.style.display==='block'?'none':'block';
+}
+function openWindow(name){
+ document.getElementById('windowTitle').innerText=name;
+ document.getElementById('window').style.display='block';
+ document.getElementById('startMenu').style.display='none';
+}
+function closeWindow(){
+ document.getElementById('window').style.display='none';
+}
+function updateClock(){
+ document.getElementById('clock').innerText=
+ new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+}
+updateClock();
+setInterval(updateClock,1000);
+</script>
+</body>
+</html>
